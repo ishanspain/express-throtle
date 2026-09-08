@@ -5,11 +5,12 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "tsup index.ts --format esm,cjs --dts --out-dir dist --clean",
     "prepublishOnly": "pnpm run build"
   },
   "files": [
-    "dist"
+    "dist",
+    "!dist/**/*.map"
   ],
   "keywords": [],
   "author": "",
@@ -24,16 +25,18 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     }
   },
   "packageManager": "pnpm@12.3.4",
   "type": "module",
-  "dependencies": {
+  "peerDependencies": {
     "express": "^5.2.1"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
-    "typescript": "^7.0.2"
+    "tsup": "^8.5.1",
+    "typescript": "^5.7.3"
   }
 }
